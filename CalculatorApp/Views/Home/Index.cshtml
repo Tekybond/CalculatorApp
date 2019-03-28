@@ -1,0 +1,69 @@
+﻿@model CalculatorApp.Models.RingColorModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+    <div class="row">
+        <h3>Resistor - Ohm value calculator</h3>
+    </div>
+
+    <div class="row">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "frmOhmCalc" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.LabelFor(d => d.BandAColor, new { @class = "requiredLabel" })
+                    @Html.DropDownListFor(d => d.BandAColor, new SelectList(Model.SignificantColors, "key", "value"), "", new { @id = "ddBandA", @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(d => d.BandAColor)
+                </div>
+            </div>    <div class="row">
+                <div class="col-md-10 form-group">
+                    @Html.LabelFor(d => d.BandBColor, new { @class = "requiredLabel" })
+                    @Html.DropDownListFor(d => d.BandBColor, new SelectList(Model.SignificantColors, "key", "value"), "", new { @id = "ddBandB", @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(d => d.BandBColor)
+                </div>
+            </div>    <div class="row">
+                <div class="col-md-10 form-group">
+                    @Html.LabelFor(d => d.BandCColor, new { @class = "requiredLabel" })
+                    @Html.DropDownListFor(d => d.BandCColor, new SelectList(Model.MultiplierColors, "key", "value"), "", new { @id = "ddBandC", @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(d => d.BandCColor)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 form-group">
+                    @Html.LabelFor(d => d.BandDColor, new { @class = "requiredLabel" })
+                    @Html.DropDownListFor(d => d.BandDColor, new SelectList(Model.ToleranceColors, "key", "value"), "", new { @id = "ddBandD", @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(d => d.BandDColor)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="dvError">
+
+                </div>
+                &nbsp;&nbsp;
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="dvResult">
+
+                </div>
+                &nbsp;&nbsp;
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" name="name" value="Calculate" class="btn btn-primary" id="btnCalculate" />
+                </div>
+            </div>
+            <p>
+                <div class="text-success" id="dvCalcVal">
+
+                </div>
+            </p>
+
+        }
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
